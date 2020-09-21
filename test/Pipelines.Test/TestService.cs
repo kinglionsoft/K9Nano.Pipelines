@@ -2,6 +2,6 @@ namespace Pipelines.Test
 {
     public class TestService
     {
-        public string GetValue(string name) => name + " value";
+        public string GetValue(string name, string from) => name + " value, from: " + from;
     }
 }

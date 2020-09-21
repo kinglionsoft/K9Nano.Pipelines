@@ -8,6 +8,7 @@ namespace Pipelines.Test
         {
             this.Insert(new TestMiddleware1())
                 .Insert(new TestMiddleware2())
+                .Insert(new TestMiddleware3())
                 ;
         }
     }

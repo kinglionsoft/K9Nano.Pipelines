@@ -10,8 +10,8 @@ namespace K9Nano.Pipelines
         protected IList<Func<PipelineDelegate<TContext>, PipelineDelegate<TContext>>> Components
             = new List<Func<PipelineDelegate<TContext>, PipelineDelegate<TContext>>>();
 
-        public virtual IPipelineBuilder<TContext> Insert(Func<PipelineDelegate<TContext>, 
-            PipelineDelegate<TContext>> component, 
+        public virtual IPipelineBuilder<TContext> Insert(Func<PipelineDelegate<TContext>,
+            PipelineDelegate<TContext>> component,
             int? index = null)
         {
             if (index.HasValue)
@@ -44,7 +44,13 @@ namespace K9Nano.Pipelines
 
         public virtual PipelineDelegate<TContext> Build()
         {
-            return Components.Reverse()
+            if (Components.Count == 0)
+            {
+                throw new NotSupportedException("Components is empty");
+            }
+
+            return Components
+                .Reverse()
                 .Aggregate(
                     (PipelineDelegate<TContext>)(context => new ValueTask()),
                     (current, next) => next(current)

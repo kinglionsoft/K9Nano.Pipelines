@@ -1,18 +1,22 @@
 using System;
 using System.Threading.Tasks;
+using K9Nano.Pipelines;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Pipelines.Test
 {
     public class PipelineTest
     {
         private readonly IServiceProvider _serviceProvider;
-
-        public PipelineTest()
+        private readonly ITestOutputHelper _helper;
+        public PipelineTest(ITestOutputHelper helper)
         {
+            _helper = helper;
             var services = new ServiceCollection()
                     .AddSingleton<TestService>()
+                    .AddSingleton(_helper)
                     .AddSingleton<ITestPipelineInvoker, TestPipelineInvoker>()
                 ;
 
@@ -21,11 +25,11 @@ namespace Pipelines.Test
 
         [Theory]
         [InlineData("", "Empty")]
-        [InlineData("Foo", "Foo value")]
-        public async Task TestOutput(string name, string value)
+        [InlineData("Foo", "Foo value, from: TestMiddleware3")]
+        public async Task Middleware(string name, string value)
         {
             var invoker = _serviceProvider.GetRequiredService<ITestPipelineInvoker>();
-            var output = await invoker.InvokeAsync(new TestInput {Name = name}, default);
+            var output = await invoker.InvokeAsync(new TestInput { Name = name }, default);
             Assert.Equal(value, output.Value);
         }
     }
