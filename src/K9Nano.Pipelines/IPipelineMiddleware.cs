@@ -4,6 +4,6 @@ namespace K9Nano.Pipelines
 {
     public interface IPipelineMiddleware<in TContext>
     {
-        ValueTask InvokeAsync(TContext context);
+        Task InvokeAsync(TContext context);
     }
 }

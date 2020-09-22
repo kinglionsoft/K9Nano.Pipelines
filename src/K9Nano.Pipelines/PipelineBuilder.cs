@@ -52,7 +52,7 @@ namespace K9Nano.Pipelines
             return Components
                 .Reverse()
                 .Aggregate(
-                    (PipelineDelegate<TContext>)(context => new ValueTask()),
+                    (PipelineDelegate<TContext>)(context => Task.CompletedTask),
                     (current, next) => next(current)
                 );
         }

@@ -6,7 +6,7 @@ namespace K9Nano.Pipelines
     public static class PipeLineBuilderExtensions
     {
         public static IPipelineBuilder<TContext> Insert<TContext>(this IPipelineBuilder<TContext> builder,
-            Func<TContext, ValueTask> action,
+            Func<TContext, Task> action,
             int? index = null)
             where TContext : IPipelineContext
         {

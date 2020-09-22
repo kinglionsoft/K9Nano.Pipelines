@@ -67,7 +67,7 @@ namespace K9Nano.Pipelines
         {
         }
 
-        public virtual async ValueTask<TOutput> InvokeAsync(TInput input, CancellationToken cancellation)
+        public virtual async Task<TOutput> InvokeAsync(TInput input, CancellationToken cancellation)
         {
             var context = await InvokingAsync(cancellation, ctx => ctx.Input = input);
             return context.Output;
@@ -89,7 +89,7 @@ namespace K9Nano.Pipelines
         {
         }
 
-        public virtual async ValueTask InvokeAsync(TInput input, CancellationToken cancellation)
+        public virtual async Task InvokeAsync(TInput input, CancellationToken cancellation)
         {
             await InvokingAsync(cancellation, ctx => ctx.Input = input);
         }
@@ -102,7 +102,7 @@ namespace K9Nano.Pipelines
         {
         }
 
-        public virtual async ValueTask InvokeAsync(CancellationToken cancellation)
+        public virtual async Task InvokeAsync(CancellationToken cancellation)
         {
             await InvokingAsync(cancellation);
         }

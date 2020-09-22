@@ -7,7 +7,7 @@ namespace Pipelines.Test
 {
     public class TestMiddleware3 : IPipelineMiddleware<PipelineContext<TestInput, TestOutput>>
     {
-        public ValueTask InvokeAsync(PipelineContext<TestInput, TestOutput> context)
+        public Task InvokeAsync(PipelineContext<TestInput, TestOutput> context)
         {
             var log = context.ServiceProvider.GetService<ITestOutputHelper>();
             log.WriteLine($"TestMiddleware3 invoked, inputs: {context.Input}");
@@ -18,7 +18,7 @@ namespace Pipelines.Test
             {
                 Value = service.GetValue(context.Input.Name, nameof(TestMiddleware3))
             };
-            return new ValueTask();
+            return Task.CompletedTask;
         }
     }
 }

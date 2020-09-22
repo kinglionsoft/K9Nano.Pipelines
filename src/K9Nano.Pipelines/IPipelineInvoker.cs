@@ -5,16 +5,16 @@ namespace K9Nano.Pipelines
 {
     public interface IPipelineInvoker
     {
-        ValueTask InvokeAsync(CancellationToken cancellation);
+        Task InvokeAsync(CancellationToken cancellation);
     }
 
     public interface IPipelineInvoker<in TInput>
     {
-        ValueTask InvokeAsync(TInput input, CancellationToken cancellation);
+        Task InvokeAsync(TInput input, CancellationToken cancellation);
     }
 
     public interface IPipelineInvoker<in TInput, TOutput>
     {
-        ValueTask<TOutput> InvokeAsync(TInput input, CancellationToken cancellation);
+        Task<TOutput> InvokeAsync(TInput input, CancellationToken cancellation);
     }
 }
