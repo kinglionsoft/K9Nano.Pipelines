@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <Authors>K9</Authors>
-    <Version>0.0.3</Version>
+    <Version>1.0.0</Version>
     <Description>A ligth weight component for processing pipeline jobs.</Description>
     <PackageTags>Pipeline</PackageTags>
   </PropertyGroup>
